@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/blue_light"
+    android:background="#1e1e1e"
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:background="@color/blue_light"
+        android:background="#1e1e1e"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -25,6 +25,15 @@
 
 
         <TextView
+            android:id="@+id/txt_Login_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_marginBottom="50dp"
+            android:textColor="#8BC34A"
+            android:textSize="50sp" />
+
+        <TextView
             android:id="@+id/txt_username"
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -35,7 +44,6 @@
 
         <EditText
             android:id="@+id/txt_password"
-            android:layout_width="match_parent"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:ems="10"
