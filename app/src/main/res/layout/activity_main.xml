@@ -28,18 +28,23 @@
             android:id="@+id/txt_Login_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
             android:layout_marginBottom="50dp"
+            android:fontFamily="sans-serif-medium"
+            android:lineSpacingExtra="8sp"
+            android:text="Login"
+            android:textAlignment="center"
             android:textColor="#8BC34A"
             android:textSize="50sp" />
 
-        <TextView
+        <EditText
             android:id="@+id/txt_username"
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/border_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
             android:hint="Username"
+            android:background="@drawable/border_txt"
+            android:layout_marginBottom="10dp"
             android:textSize="24sp" />
 
         <EditText
@@ -59,22 +64,20 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/btn_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick=""
                 android:layout_marginRight="5dp"
-                android:text="SIGN" />
+                android:layout_weight="1"
+                android:text="Login" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick=""
                 android:layout_marginLeft="5dp"
-                android:text="LOGIN" />
+                android:layout_weight="1"
+                android:text="Signup" />
         </LinearLayout>
 
     </LinearLayout>
