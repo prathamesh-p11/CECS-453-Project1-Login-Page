@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
@@ -43,23 +44,39 @@ public class MainActivity extends AppCompatActivity
                 String username = txt_username.getText().toString();
                 String password = txt_password.getText().toString();
 
-                boolean isValidUsername = userdata.CheckUsername(username);
-
-                if(!isValidUsername)
+                if(username.length() == 0)
                 {
-                    //notify user and prompt to signup
+                    Toast.makeText(getApplicationContext(),"Username field cannot be empty", Toast.LENGTH_LONG).show();
+                }
+                else if(password.length() == 0)
+                {
+                    Toast.makeText(getApplicationContext(),"Password field cannot be empty", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    boolean isCorrectPassword = userdata.CheckCredentials(username, password);
-                    if(!isCorrectPassword)
+                    boolean isValidUsername = userdata.CheckUsername(username);
+
+                    if(!isValidUsername)
                     {
-                        //notify user: incorrect password
+                        //notify user and prompt to signup
+                        Toast.makeText(getApplicationContext(),"Entered username is not valid, please signup to continue", Toast.LENGTH_LONG).show();
                     }
                     else
                     {
-                        //login successful!
-                        //go to welcome
+                        boolean isCorrectPassword = userdata.CheckCredentials(username, password);
+                        if(!isCorrectPassword)
+                        {
+                            //notify user: incorrect password
+                            Toast.makeText(getApplicationContext(),"Login attempt failed! Incorrect Password", Toast.LENGTH_LONG).show();
+                            //Clear password field
+                            txt_password.setText("");
+                        }
+                        else
+                        {
+                            //login successful!
+                            Toast.makeText(getApplicationContext(),"Login attempt successful!", Toast.LENGTH_LONG).show();
+                            //go to welcome
+                        }
                     }
                 }
             }
