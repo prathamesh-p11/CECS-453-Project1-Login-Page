@@ -36,6 +36,8 @@ public class activity_signup extends AppCompatActivity {
         singButton = findViewById(R.id.btn_signup2);
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
+        Intent i = getIntent();
+        userdata = (Data) i.getSerializableExtra("Data");
 
         singButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,14 +46,12 @@ public class activity_signup extends AppCompatActivity {
                 addValidationToView();
                 if (username.length() == 0)
                     username.setError("Username is required");
-                else if(!userdata.CheckUsername(username.getText().toString()))
+                else if(userdata.CheckUsername(username.getText().toString()))
                 {
                     username.setError("This username is already taken");
                 }
                 else if(awesomeValidation.validate())
                 {
-                    Intent i = getIntent();
-                    userdata = (Data) i.getSerializableExtra("Data");
                     userdata.AddCredential(username.getText().toString(), password.getText().toString());
                     //userdata.ShowAll();
 
