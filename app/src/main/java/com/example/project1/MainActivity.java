@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import java.io.Serializable;
 
-
 public class MainActivity extends AppCompatActivity implements  Serializable
 {
     private Button btn_login;
@@ -83,7 +82,11 @@ public class MainActivity extends AppCompatActivity implements  Serializable
                         {
                             //login successful!
                             Toast.makeText(getApplicationContext(),"Login attempt successful!", Toast.LENGTH_LONG).show();
+
                             //go to welcome
+                            Intent welcome = new Intent(getApplicationContext(), activity_welcome.class);
+                            welcome.putExtra("username", username);  //For this to work, Data class must implement serializable interface
+                            startActivity(welcome);
                         }
                     }
                 }

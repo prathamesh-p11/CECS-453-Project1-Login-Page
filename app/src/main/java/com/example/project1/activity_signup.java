@@ -54,12 +54,13 @@ public class activity_signup extends AppCompatActivity {
                 {
                     Intent i = getIntent();
                     userdata = (Data) i.getSerializableExtra("Data");
-
                     userdata.AddCredential(username.getText().toString(), password.getText().toString());
                     userdata.ShowAll();
+
                     Intent login = new Intent(getApplicationContext(), MainActivity.class);
                     login.putExtra("Data", userdata);
                     startActivity(login);
+
                 }
             }
         });
@@ -76,42 +77,4 @@ public class activity_signup extends AppCompatActivity {
 
         awesomeValidation.addValidation(this, R.id.txt_signPhone, "^[+]?[0-9]{10,13}$", R.string.invalid_phone);
     }
-
-   /* private boolean CheckAllFields() {
-        if (username.length() == 0) {
-            username.setError("This field is required");
-            return false;
-        }
-        if (password.length() == 0) {
-            password.setError("This field is required");
-            return false;
-        } else if (password.length() < 8) {
-            password.setError("Password must be minimum 8 characters");
-            return false;
-        }
-
-        if (password2.length() == 0) {
-            password2.setError("This field is required");
-            return false;
-        } else if (password2.length() < 8) {
-            password2.setError("Password must be minimum 8 characters");
-            return false;
-        }
-
-        if (!password2.toString().equals(password.toString())){
-            password2.setError("password does not match with first enter password.");
-            return false;
-        }
-
-        if (email.length() == 0) {
-            email.setError("Email is required");
-            return false;
-        }
-
-        if(phone.length()==0){
-            phone.setError("Phone number is required");
-            return false;
-        }
-        return true;
-    }*/
 }
