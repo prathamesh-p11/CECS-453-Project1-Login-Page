@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements  Serializable
                     if(!isCorrectPassword)
                     {
                         //notify user: incorrect password
-                        txt_password.setError("Incorrect Password!");
+                        Toast.makeText(getApplicationContext(),"Incorrect Password! Please try again", Toast.LENGTH_LONG).show();
                         //Clear password field
                         txt_password.setText("");
                     }

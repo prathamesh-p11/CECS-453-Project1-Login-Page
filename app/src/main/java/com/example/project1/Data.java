@@ -1,11 +1,10 @@
 package com.example.project1;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
+//import java.util.Map;
 
 public class Data implements Serializable {
 
@@ -21,13 +20,14 @@ public class Data implements Serializable {
         hmCredentials.put("test", "1234");
     }
 
+    /*
     public void ShowAll()
     {
         for(Map.Entry i : hmCredentials.entrySet())
         {
             Log.e("hm",i.getKey().toString() + " : " + i.getValue().toString());
         }
-    }
+    }*/
     // This method adds a new username and password to the hashmap
     public void AddCredential(String username, String password){
         Log.e("DataClass", "In Add credential");

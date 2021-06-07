@@ -44,13 +44,16 @@ public class activity_signup extends AppCompatActivity {
                 addValidationToView();
                 if (username.length() == 0)
                     username.setError("Username is required");
-
+                else if(!userdata.CheckUsername(username.getText().toString()))
+                {
+                    username.setError("This username is already taken");
+                }
                 else if(awesomeValidation.validate())
                 {
                     Intent i = getIntent();
                     userdata = (Data) i.getSerializableExtra("Data");
                     userdata.AddCredential(username.getText().toString(), password.getText().toString());
-                    userdata.ShowAll();
+                    //userdata.ShowAll();
 
                     Intent login = new Intent(getApplicationContext(), MainActivity.class);
                     login.putExtra("Data", userdata);
