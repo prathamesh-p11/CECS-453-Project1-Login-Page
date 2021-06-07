@@ -1,8 +1,8 @@
 /*
     Assignment1
     Written by:
-        Arjang Fahim 098765432
-        Arjang Fahim 123455678
+        Prathamesh Patil 025910428
+        Devarsh Patel
 
 
  */
@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.widget.Button;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -38,69 +37,63 @@ public class MainActivity extends AppCompatActivity implements  Serializable
         btn_signup = findViewById(R.id.btn_signup);
         txt_username = findViewById(R.id.txt_username);
         txt_password = findViewById(R.id.txt_password);
-        if((Data)getIntent().getSerializableExtra("Data")!=null)
+        if(getIntent().getSerializableExtra("Data")!=null)
         {
             userdata = (Data)getIntent().getSerializableExtra("Data");
             //userdata.ShowAll();
         }
 
         //Validate username and password here
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = txt_username.getText().toString();
-                String password = txt_password.getText().toString();
+        btn_login.setOnClickListener(v -> {
+            String username = txt_username.getText().toString();
+            String password = txt_password.getText().toString();
 
-                if(username.length() == 0)
+            if(username.length() == 0)
+            {
+                txt_username.setError("Username required");
+            }
+            else if(password.length() == 0)
+            {
+                txt_password.setError("Password required");
+            }
+            else
+            {
+                boolean isValidUsername = userdata.CheckUsername(username);
+
+                if(!isValidUsername)
                 {
-                    txt_username.setError("Username required");
-                }
-                else if(password.length() == 0)
-                {
-                    txt_password.setError("Password required");
+                    //notify user and prompt to signup
+                    txt_username.setError("Username is not registered");
                 }
                 else
                 {
-                    boolean isValidUsername = userdata.CheckUsername(username);
-
-                    if(!isValidUsername)
+                    boolean isCorrectPassword = userdata.CheckCredentials(username, password);
+                    if(!isCorrectPassword)
                     {
-                        //notify user and prompt to signup
-                        txt_username.setError("Username is not registered");
+                        //notify user: incorrect password
+                        txt_password.setError("Incorrect Password!");
+                        //Clear password field
+                        txt_password.setText("");
                     }
                     else
                     {
-                        boolean isCorrectPassword = userdata.CheckCredentials(username, password);
-                        if(!isCorrectPassword)
-                        {
-                            //notify user: incorrect password
-                            txt_password.setError("Incorrect Password!");
-                            //Clear password field
-                            txt_password.setText("");
-                        }
-                        else
-                        {
-                            //login successful!
-                            Toast.makeText(getApplicationContext(),"Login attempt successful!", Toast.LENGTH_LONG).show();
+                        //login successful!
+                        Toast.makeText(getApplicationContext(),"Login attempt successful!", Toast.LENGTH_LONG).show();
 
-                            //go to welcome
-                            Intent welcome = new Intent(getApplicationContext(), activity_welcome.class);
-                            welcome.putExtra("username", username);  //For this to work, Data class must implement serializable interface
-                            startActivity(welcome);
-                        }
+                        //go to welcome
+                        Intent welcome = new Intent(getApplicationContext(), activity_welcome.class);
+                        welcome.putExtra("username", username);  //For this to work, Data class must implement serializable interface
+                        startActivity(welcome);
                     }
                 }
             }
         });
 
         //Lets user create a new account and store user info
-        btn_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signup = new Intent(getApplicationContext(), activity_signup.class);
-                signup.putExtra("Data", userdata);  //For this to work, Data class must implement serializable interface
-                startActivity(signup);
-            }
+        btn_signup.setOnClickListener(v -> {
+            Intent signup = new Intent(getApplicationContext(), activity_signup.class);
+            signup.putExtra("Data", userdata);  //For this to work, Data class must implement serializable interface
+            startActivity(signup);
         });
     }
 }

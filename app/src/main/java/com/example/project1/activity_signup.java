@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.ValidationStyle;
 
@@ -43,14 +41,11 @@ public class activity_signup extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                boolean isValidUserName = true;
                 addValidationToView();
                 if (username.length() == 0)
-                {
-                    isValidUserName = false;
                     username.setError("Username is required");
-                }
-                else if(awesomeValidation.validate() && isValidUserName)
+
+                else if(awesomeValidation.validate())
                 {
                     Intent i = getIntent();
                     userdata = (Data) i.getSerializableExtra("Data");
