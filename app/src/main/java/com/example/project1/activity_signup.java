@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import com.basgeekball.awesomevalidation.AwesomeValidation;
@@ -13,53 +12,48 @@ import com.basgeekball.awesomevalidation.ValidationStyle;
 
 public class activity_signup extends AppCompatActivity {
 
-    private EditText username;
-    private EditText password;
-    private EditText password2;
-    private EditText email;
-    private EditText phone;
+    private EditText txt_signUsername;
+    private EditText txt_signPassword;
     private Button singButton;
     private AwesomeValidation awesomeValidation;
     private Data userdata;
-
-    // boolean isValid = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        username = findViewById(R.id.txt_signUsername);
-        password = findViewById(R.id.txt_signPassword);
-        password2= findViewById(R.id.txt_signPassword2);
-        email=findViewById(R.id.txt_signEmail);
-        phone= findViewById(R.id.txt_signPhone);
+        txt_signUsername = findViewById(R.id.txt_signUsername);
+        txt_signPassword = findViewById(R.id.txt_signPassword);
+
         singButton = findViewById(R.id.btn_signup2);
         awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
 
+        //Retrieve the serialized userdata object sent by login activity and store in local variable
         Intent i = getIntent();
         userdata = (Data) i.getSerializableExtra("Data");
 
-        singButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
+        //Perform validation after sign up button is clicked
+        singButton.setOnClickListener(v -> {
+            addValidationToView();
+
+            //Check if username field is not empty
+            if (txt_signUsername.length() == 0)
+                txt_signUsername.setError("Username is required");
+            //Check if username field is unique: Checkusername function returns true is the username already exists in data
+            else if(userdata.CheckUsername(txt_signUsername.getText().toString()))
             {
-                addValidationToView();
-                if (username.length() == 0)
-                    username.setError("Username is required");
-                else if(userdata.CheckUsername(username.getText().toString()))
-                {
-                    username.setError("This username is already taken");
-                }
-                else if(awesomeValidation.validate())
-                {
-                    userdata.AddCredential(username.getText().toString(), password.getText().toString());
-                    //userdata.ShowAll();
+                txt_signUsername.setError("This username is already taken");
+            }
+            else if(awesomeValidation.validate())
+            {
+                //If validation is successful, add user credentials to userdata object
+                userdata.AddCredential(txt_signUsername.getText().toString(), txt_signPassword.getText().toString());
 
-                    Intent login = new Intent(getApplicationContext(), MainActivity.class);
-                    login.putExtra("Data", userdata);
-                    startActivity(login);
+                //Send the newly updated userdata object back to the login activity
+                Intent login = new Intent(getApplicationContext(), activity_login.class);
+                login.putExtra("Data", userdata);
+                startActivity(login);
 
-                }
             }
         });
     }
@@ -72,7 +66,6 @@ public class activity_signup extends AppCompatActivity {
         String regexPassword = ".{8,}";
         awesomeValidation.addValidation(this, R.id.txt_signPassword, regexPassword, R.string.invalid_password);
         awesomeValidation.addValidation(this, R.id.txt_signPassword2, R.id.txt_signPassword, R.string.invalid_confirm_password);
-
         awesomeValidation.addValidation(this, R.id.txt_signPhone, "^[+]?[0-9]{10,13}$", R.string.invalid_phone);
     }
 }
