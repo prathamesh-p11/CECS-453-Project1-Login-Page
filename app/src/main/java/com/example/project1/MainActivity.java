@@ -53,11 +53,11 @@ public class MainActivity extends AppCompatActivity implements  Serializable
 
                 if(username.length() == 0)
                 {
-                    Toast.makeText(getApplicationContext(),"Username field cannot be empty", Toast.LENGTH_LONG).show();
+                    txt_username.setError("Username required");
                 }
                 else if(password.length() == 0)
                 {
-                    Toast.makeText(getApplicationContext(),"Password field cannot be empty", Toast.LENGTH_LONG).show();
+                    txt_password.setError("Password required");
                 }
                 else
                 {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements  Serializable
                     if(!isValidUsername)
                     {
                         //notify user and prompt to signup
-                        Toast.makeText(getApplicationContext(),"Entered username is not valid, please signup to continue", Toast.LENGTH_LONG).show();
+                        txt_username.setError("Username is not registered");
                     }
                     else
                     {
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements  Serializable
                         if(!isCorrectPassword)
                         {
                             //notify user: incorrect password
-                            Toast.makeText(getApplicationContext(),"Login attempt failed! Incorrect Password", Toast.LENGTH_LONG).show();
+                            txt_password.setError("Incorrect Password!");
                             //Clear password field
                             txt_password.setText("");
                         }
