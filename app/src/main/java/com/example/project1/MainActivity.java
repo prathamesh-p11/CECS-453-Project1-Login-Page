@@ -10,14 +10,18 @@
 package com.example.project1;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.widget.Button;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.Serializable;
 
-public class MainActivity extends AppCompatActivity
+
+public class MainActivity extends AppCompatActivity implements  Serializable
 {
     private Button btn_login;
     private Button btn_signup;
@@ -35,7 +39,11 @@ public class MainActivity extends AppCompatActivity
         btn_signup = findViewById(R.id.btn_signup);
         txt_username = findViewById(R.id.txt_username);
         txt_password = findViewById(R.id.txt_password);
-
+        if((Data)getIntent().getSerializableExtra("Data")!=null)
+        {
+            userdata = (Data)getIntent().getSerializableExtra("Data");
+            //userdata.ShowAll();
+        }
 
         //Validate username and password here
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -86,10 +94,10 @@ public class MainActivity extends AppCompatActivity
         btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent signup = new Intent(getApplicationContext(), activity_signup.class);
+                signup.putExtra("Data", userdata);  //For this to work, Data class must implement serializable interface
+                startActivity(signup);
             }
         });
-
-
     }
 }
