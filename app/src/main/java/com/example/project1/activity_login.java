@@ -2,7 +2,7 @@
     Assignment1
     Written by:
         Prathamesh Patil 025910428
-        Devarsh Patel
+        Devarsh Patel 026799030
  */
 
 package com.example.project1;
@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//Prathamesh Patil
 public class activity_login extends AppCompatActivity
 {
     private Button btn_login;

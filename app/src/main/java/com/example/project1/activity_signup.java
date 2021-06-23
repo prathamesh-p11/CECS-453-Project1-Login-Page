@@ -18,6 +18,7 @@ public class activity_signup extends AppCompatActivity {
     private AwesomeValidation awesomeValidation;
     private Data userdata;
 
+    //Prathamesh Patil
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,7 @@ public class activity_signup extends AppCompatActivity {
         });
     }
 
+    //Devarsh Patel
     private void addValidationToView()
     {
         //Regex from: https://stackoverflow.com/a/58771373

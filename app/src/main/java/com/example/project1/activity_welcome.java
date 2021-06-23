@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+//Prathamesh Patil
 public class activity_welcome extends AppCompatActivity
 {
     private TextView txt_loggedInUsername;
