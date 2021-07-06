@@ -25,7 +25,7 @@
 2. A Signup activity
 <br>
 <p align="center">
-  <img src="docs/signup.png">
+  <img src="docs/signup.png"  width="400" height="640">
 </p>
 <br>
 
