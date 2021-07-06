@@ -4,7 +4,7 @@
 1. A Login activity
 <br>
 <p align="center">
-  <img src="docs/login.png">
+  <img src="docs/login.png" width="200" height="200">
 </p>
 <br>
 
